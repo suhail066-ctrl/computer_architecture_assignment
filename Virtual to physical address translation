@@ -1,0 +1,24 @@
+page_size = 1024
+
+page_table = {
+    0: 5,
+    1: 2,
+    2: None,
+    3: 7
+}
+
+addresses = [500, 1500, 2500, 3500]
+
+print("Virtual Address | Page | Offset | Frame | Physical Address")
+
+for address in addresses:
+    page = address // page_size
+    offset = address % page_size
+
+    frame = page_table.get(page)
+
+    if frame is not None:
+        physical = frame * page_size + offset
+        print(address, "|", page, "|", offset, "|", frame, "|", physical)
+    else:
+        print(address, "|", page, "|", offset, "| Page Fault | Page Fault")
